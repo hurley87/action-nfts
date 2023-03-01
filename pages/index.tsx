@@ -1,4 +1,4 @@
-import { Box, Button, Text, Stack } from '@chakra-ui/react';
+import { Box, Button, Text, Stack, Skeleton } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
@@ -110,14 +110,12 @@ const Home: NextPage = () => {
 
       <Stack maxW="xl" mx="auto">
         {apiOutput ? (
-          <Image
-            blurDataURL={apiOutput}
-            placeholder="blur"
-            src={apiOutput}
-            alt="AI"
-            width={400}
-            height={400}
-          />
+          <Box width={400} height={400} position="relative">
+            <Skeleton zIndex={0} position="absolute" width={400} height={400} />
+            <Box zIndex={1} width={400} height={400} position="absolute">
+              <Image src={apiOutput} alt="AI" width={400} height={400} />
+            </Box>
+          </Box>
         ) : (
           <Button
             isLoading={isGenerating}
