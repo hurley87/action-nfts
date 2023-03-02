@@ -1,8 +1,41 @@
-import { Box, Button, Text, Stack, Skeleton } from '@chakra-ui/react';
+import { Box, Button, Stack, Skeleton, Link, Flex } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useState } from 'react';
+import { create } from 'ipfs-http-client';
+
+const projectId = process.env.NEXT_PUBLIC_INFRA_PROJECT_ID;
+const projectSecret = process.env.NEXT_PUBLIC_INFRA_SECRET;
+const projectIdAndSecret = `${projectId}:${projectSecret}`;
+
+/*
+const ipfs = create({
+  host: 'ipfs.nifty.ink',
+  port: 3001,
+  protocol: 'https',
+});
+*/
+
+const ipfs = create({
+  host: 'ipfs.infura.io',
+  port: 5001,
+  protocol: 'https',
+  headers: {
+    authorization: `Basic ${Buffer.from(projectIdAndSecret).toString(
+      'base64'
+    )}`,
+  },
+});
+
+const getFromIPFS = async (cid: string) => {
+  const decoder = new TextDecoder();
+  let content = '';
+  for await (const chunk of ipfs.cat(cid)) {
+    content += decoder.decode(chunk);
+  }
+  return content;
+};
 
 const gesturalOptions = [
   'Dripping',
@@ -25,11 +58,6 @@ const artistOptions = [
   'Lee Krasners',
   'Joan Mitchell',
 ];
-
-// function that picks a randon number between 0 and the length of the array
-const getRandomNumber = (array: string[]) => {
-  return Math.floor(Math.random() * array.length);
-};
 
 const Home: NextPage = () => {
   const [isGenerating, setIsGenerating] = useState(false);
@@ -61,6 +89,21 @@ const Home: NextPage = () => {
     setApiOutput(`${url}`);
     setIsGenerating(false);
   };
+
+  const handleMint = async () => {
+    const mintJson = {
+      name: 'AI Art',
+      description: `A ${gestural}, ${abstraction} painting in the style of ${artist}`,
+      image: apiOutput,
+      attributes: [
+        { trait_type: 'Gestural', value: gestural },
+        { trait_type: 'Abstraction', value: abstraction },
+        { trait_type: 'Artist', value: artist },
+      ],
+    };
+    const uploaded = await ipfs.add(JSON.stringify(mintJson));
+    console.log('Uploaded Hash: ', uploaded);
+  };
   return (
     <div>
       <Head>
@@ -72,8 +115,8 @@ const Home: NextPage = () => {
         {gesturalOptions.map((item) => (
           <Button
             key={item}
-            variant={item === gestural ? 'ghost' : 'outline'}
-            colorScheme="black"
+            variant={'outline'}
+            colorScheme={item === gestural ? 'black' : 'gray'}
             size="sm"
             onClick={() => setGestural(item)}
           >
@@ -85,8 +128,8 @@ const Home: NextPage = () => {
         {abstractionOptions.map((item) => (
           <Button
             key={item}
-            variant={item === abstraction ? 'ghost' : 'outline'}
-            colorScheme="black"
+            variant={'outline'}
+            colorScheme={item === abstraction ? 'black' : 'gray'}
             size="sm"
             onClick={() => setAbstraction(item)}
           >
@@ -98,8 +141,8 @@ const Home: NextPage = () => {
         {artistOptions.map((item) => (
           <Button
             key={item}
-            variant={item === artist ? 'ghost' : 'outline'}
-            colorScheme="black"
+            variant={'outline'}
+            colorScheme={item === artist ? 'black' : 'gray'}
             size="sm"
             onClick={() => setArtist(item)}
           >
@@ -108,7 +151,7 @@ const Home: NextPage = () => {
         ))}
       </Box>
 
-      <Stack maxW="xl" mx="auto">
+      <Stack maxW="400px" mx="auto">
         {apiOutput ? (
           <Box width={400} height={400} position="relative">
             <Skeleton zIndex={0} position="absolute" width={400} height={400} />
@@ -119,7 +162,6 @@ const Home: NextPage = () => {
         ) : (
           <Button
             isLoading={isGenerating}
-            colorScheme="gray"
             onClick={callGenerateEndpoint}
             width={400}
             height={400}
@@ -128,7 +170,24 @@ const Home: NextPage = () => {
           </Button>
         )}
         {apiOutput !== '' && (
-          <Button onClick={() => setApiOutput('')}>Try again</Button>
+          <Flex gap="2">
+            <Button
+              colorScheme="teal"
+              variant="outline"
+              w="full"
+              onClick={() => setApiOutput('')}
+            >
+              Reset
+            </Button>
+            <Button
+              variant="solid"
+              w="full"
+              colorScheme="teal"
+              onClick={handleMint}
+            >
+              Mint
+            </Button>
+          </Flex>
         )}
       </Stack>
     </div>
