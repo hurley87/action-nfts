@@ -44,6 +44,7 @@ const gesturalOptions = [
   'Brushwork',
   'Scumbling',
 ];
+
 const abstractionOptions = [
   'Non-figurative',
   'Lyrical',
