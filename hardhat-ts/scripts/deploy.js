@@ -1,4 +1,3 @@
-// tslint:disable-next-line: no-implicit-dependencies
 import { ethers } from 'hardhat';
 
 async function main() {
