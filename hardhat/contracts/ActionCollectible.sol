@@ -4,11 +4,11 @@ pragma solidity ^0.8.17;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract NFT is ERC721 {
+contract Action is ERC721 {
     using Counters for Counters.Counter;
     Counters.Counter private currentTokenId;
 
-    constructor() ERC721("NFT Name", "NFT") {}
+    constructor() ERC721("Action-Painting", "Action") {}
 
     function mint(address recipient)
         public
