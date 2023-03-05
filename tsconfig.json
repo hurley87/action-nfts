@@ -22,7 +22,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "hardhat-ts/scripts/deploy.js"
+    "hardhat-ts/scripts/deploy.ts"
   ],
   "exclude": ["node_modules"]
 }
