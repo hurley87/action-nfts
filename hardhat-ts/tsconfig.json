@@ -6,15 +6,5 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true
-  },
-  "include": [
-    "types",
-    "scripts",
-    "test",
-    "helpers",
-    "./hardhat.config.ts",
-    "./deploy"
-  ],
-  "exclude": ["**/node_modules"],
-  "files": ["./hardhat.config.ts"]
+  }
 }
