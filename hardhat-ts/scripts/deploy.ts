@@ -1,7 +1,7 @@
-import { ethers } from 'hardhat';
+const hre = require('hardhat');
 
 async function main() {
-  const NFT = await ethers.getContractFactory('Action');
+  const NFT = await hre.getContractFactory('Action');
   const nft = await NFT.deploy();
 
   await nft.deployed();
