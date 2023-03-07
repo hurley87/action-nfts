@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { useAccount } from 'wagmi';
 import useActionContract from '@/hooks/contracts/useActionContract';
 import PrimaryButton from './PrimaryButton';
+import { Connect } from './Connect';
 
 const projectId = process.env.NEXT_PUBLIC_INFRA_PROJECT_ID;
 const projectSecret = process.env.NEXT_PUBLIC_INFRA_SECRET;
@@ -111,7 +112,7 @@ const Art: NextPage = () => {
 
   return (
     <Flex pt="10">
-      <Stack w="full" maxW="400px" gap="8">
+      <Stack w="full" maxW="400px" gap="10">
         <Box>
           <Text>Choose an artist:</Text>
           {artistOptions.map((item) => (
@@ -160,32 +161,36 @@ const Art: NextPage = () => {
             </Button>
           ))}
         </Box>
-        <Box pt="4" w="full">
+        <Box w="full">
           {apiOutput !== '' ? (
-            <>
-              <PrimaryButton
-                text="Mint - 0.025 ETH"
-                isLoading={isMinting}
-                onClick={handleMint}
-              />
-              <Text pb="4" pt="6" textAlign="center">
-                3,692 minted • 5d 3h 59m 45s
-              </Text>
-              <Text
-                onClick={() => setApiOutput('')}
-                size="xs"
-                color="blue.500"
-                textAlign="center"
-                display="inline-block"
-                cursor="pointer"
-                w="full"
-              >
-                Reset
-              </Text>
-            </>
+            !address ? (
+              <Connect />
+            ) : (
+              <>
+                <PrimaryButton
+                  text="Mint - 0.025 ETH"
+                  isLoading={isMinting}
+                  onClick={handleMint}
+                />
+                <Text pb="4" pt="6" textAlign="center">
+                  3,692 minted • 5d 3h 59m 45s
+                </Text>
+                <Text
+                  onClick={() => setApiOutput('')}
+                  size="xs"
+                  color="blue.500"
+                  textAlign="center"
+                  display="inline-block"
+                  cursor="pointer"
+                  w="full"
+                >
+                  Reset
+                </Text>
+              </>
+            )
           ) : (
             <PrimaryButton
-              text="Create Your Painting"
+              text="Create"
               isLoading={isGenerating}
               onClick={callGenerateEndpoint}
             />

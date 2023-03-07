@@ -1,9 +1,7 @@
-import { Box, Button, Flex, HStack, Stack, Text } from '@chakra-ui/react';
+import { Box, Flex, HStack, Stack, Text } from '@chakra-ui/react';
 import Head from 'next/head';
-import { ConnectButton } from '@rainbow-me/rainbowkit';
 import { ReactNode } from 'react';
 import Link from 'next/link';
-import PrimaryButton from './PrimaryButton';
 import { Connect } from './Connect';
 import { useRouter } from 'next/router';
 
@@ -44,13 +42,14 @@ const Layout = ({ children, title = 'Automatism art' }: Props) => {
               unpremeditated creations.
             </Text>
             <Text>
-              The aim is to bypass the rational mind and access the {"artist's"}
+              The aim is to bypass the rational mind and access the{' '}
+              {"artist's "}
               deeper, instinctual impulses, which can produce unexpected and
               often surprising results.
             </Text>
             <Text>
-              Mint this NFT to celebrate the launch of Automatism and join the
-              broader community that is using AI to create art.
+              Mint your NFT and join our community using AI to create and sell
+              art.
             </Text>
           </Stack>
         </Stack>
