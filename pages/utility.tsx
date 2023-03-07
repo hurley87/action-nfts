@@ -5,7 +5,7 @@ import Layout from '@/components/Layout';
 const UtilityPage: NextPage = () => {
   return (
     <Layout>
-      <Stack pt="12px" maxW="800px" gap="4">
+      <Stack py="12px" maxW="800px" gap="4">
         <Text>
           {`Mint holders will get exclusive access to a tool that'll let you
           create any NFT you can imagine with just text.
