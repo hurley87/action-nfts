@@ -7,6 +7,7 @@ import { configureChains, createClient, WagmiConfig } from 'wagmi';
 import { goerli } from 'wagmi/chains';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 import { QueryClient, QueryClientProvider, QueryCache } from 'react-query';
+import { Toaster } from 'react-hot-toast';
 
 const { chains, provider } = configureChains(
   [goerli],
@@ -54,6 +55,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ChakraProvider>
           <QueryClientProvider client={queryClient}>
             <Component {...pageProps} />
+            <Toaster position="top-center" />
           </QueryClientProvider>
         </ChakraProvider>
       </RainbowKitProvider>

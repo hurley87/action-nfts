@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Stack,
-  Skeleton,
-  Flex,
-  Text,
-  Link,
-} from '@chakra-ui/react';
+import { Box, Button, Stack, Skeleton, Flex, Text } from '@chakra-ui/react';
 import type { NextPage } from 'next';
 import Image from 'next/image';
 import { create } from 'ipfs-http-client';
@@ -15,6 +7,7 @@ import { useAccount } from 'wagmi';
 import useActionContract from '@/hooks/contracts/useActionContract';
 import PrimaryButton from './PrimaryButton';
 import { Connect } from './Connect';
+import { toast } from 'react-hot-toast';
 
 const projectId = process.env.NEXT_PUBLIC_INFRA_PROJECT_ID;
 const projectSecret = process.env.NEXT_PUBLIC_INFRA_SECRET;
@@ -60,6 +53,7 @@ const Art: NextPage = () => {
   const [technique, setTechnique] = useState(techniqueOptions[0]);
   const [artist, setArtist] = useState(artistOptions[0]);
   const [isMinting, setIsMinting] = useState(false);
+  const [viewOpensea, setViewOpensea] = useState(false);
   const { address } = useAccount();
   const actionContract = useActionContract();
 
@@ -101,13 +95,17 @@ const Art: NextPage = () => {
     console.log('Uploaded Hash: ', uploaded);
     const path = uploaded.path;
 
-    if (address) {
-      const nftTxn = await actionContract.mint(address, path);
-      console.log(
-        `NFT Minted! Check it out at: https://goerli.etherscan.io/tx/${nftTxn.transactionHash}`
-      );
+    try {
+      if (address) {
+        await actionContract.mint(address, path);
+        toast.success('NFT minted!');
+        setViewOpensea(true);
+      }
+      setIsMinting(false);
+    } catch {
+      toast.error('Error minting NFT');
+      setIsMinting(false);
     }
-    setIsMinting(false);
   };
 
   return (
@@ -167,16 +165,31 @@ const Art: NextPage = () => {
               <Connect />
             ) : (
               <>
-                <PrimaryButton
-                  text="Mint - 0.025 ETH"
-                  isLoading={isMinting}
-                  onClick={handleMint}
-                />
+                {viewOpensea ? (
+                  <PrimaryButton
+                    text="View On Opensea"
+                    onClick={() =>
+                      window
+                        ?.open('https://testnets.opensea.io/account', '_blank')
+                        ?.focus()
+                    }
+                  />
+                ) : (
+                  <PrimaryButton
+                    text="Mint - 0.025 ETH"
+                    isLoading={isMinting}
+                    onClick={handleMint}
+                  />
+                )}
+
                 <Text pb="4" pt="6" textAlign="center">
                   3,692 minted • 5d 3h 59m 45s
                 </Text>
                 <Text
-                  onClick={() => setApiOutput('')}
+                  onClick={() => {
+                    setApiOutput('');
+                    setViewOpensea(false);
+                  }}
                   size="xs"
                   color="blue.500"
                   textAlign="center"
