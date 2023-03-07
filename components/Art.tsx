@@ -8,6 +8,7 @@ import useActionContract from '@/hooks/contracts/useActionContract';
 import PrimaryButton from './PrimaryButton';
 import { Connect } from './Connect';
 import { toast } from 'react-hot-toast';
+import Link from 'next/link';
 
 const projectId = process.env.NEXT_PUBLIC_INFRA_PROJECT_ID;
 const projectSecret = process.env.NEXT_PUBLIC_INFRA_SECRET;
@@ -54,6 +55,7 @@ const Art: NextPage = () => {
   const [artist, setArtist] = useState(artistOptions[0]);
   const [isMinting, setIsMinting] = useState(false);
   const [viewOpensea, setViewOpensea] = useState(false);
+  const [transactionHash, setTransactionHash] = useState('');
   const { address } = useAccount();
   const actionContract = useActionContract();
 
@@ -99,6 +101,7 @@ const Art: NextPage = () => {
       if (address) {
         const transaction = await actionContract.mint(address, path);
         console.log('Transaction: ', transaction.transactionHash);
+        setTransactionHash(transaction.transactionHash);
         toast.success('NFT minted!');
         setViewOpensea(true);
       }
@@ -110,8 +113,17 @@ const Art: NextPage = () => {
   };
 
   return (
-    <Flex pt="10">
-      <Stack w="full" maxW="400px" gap="10">
+    <Flex pt="20px">
+      <Stack w="full" maxW="400px" gap="6">
+        <Text>
+          <Link href="/traits">
+            <Text display="inline" color="blue.500">
+              NFT traits
+            </Text>
+          </Link>{' '}
+          are based on the artists, techniques and movements that helped define
+          automatism in art.
+        </Text>
         <Box>
           <Text>Choose an artist:</Text>
           {artistOptions.map((item) => (
@@ -166,12 +178,15 @@ const Art: NextPage = () => {
               <Connect />
             ) : (
               <>
-                {viewOpensea ? (
+                {transactionHash !== '' ? (
                   <PrimaryButton
-                    text="View On Opensea"
+                    text="View Transaction"
                     onClick={() =>
                       window
-                        ?.open('https://testnets.opensea.io/account', '_blank')
+                        ?.open(
+                          `https://goerli.etherscan.io/tx/${transactionHash}`,
+                          '_blank'
+                        )
                         ?.focus()
                     }
                   />

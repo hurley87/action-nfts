@@ -6,11 +6,7 @@ const TraitsPage: NextPage = () => {
   return (
     <Layout>
       <Stack py="12px" maxW="800px" gap="4">
-        <Text>
-          NFTs traits are based on the artists, techniques and movements that
-          helped define automatism in art.
-        </Text>
-        <Text fontWeight="bold" fontSize="xl" pt="6">
+        <Text fontWeight="bold" fontSize="xl">
           Artists
         </Text>
         <Text>
