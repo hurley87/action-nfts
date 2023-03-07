@@ -172,7 +172,7 @@ const Art: NextPage = () => {
             </Button>
           ))}
         </Box>
-        <Box w="full">
+        <Box w="full" pt="2">
           {apiOutput !== '' ? (
             !address ? (
               <Connect />
