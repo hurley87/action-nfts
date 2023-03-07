@@ -22,7 +22,7 @@ const Layout = ({ children, title = 'Automatism art' }: Props) => {
       <Flex w="full" h="100vh" bg="black" color="white">
         <Stack
           p="24px"
-          maxW="444px"
+          maxW="400px"
           w="full"
           h="full"
           borderRight="1px solid #333333"
@@ -34,7 +34,15 @@ const Layout = ({ children, title = 'Automatism art' }: Props) => {
           <Text fontSize="5xl" fontWeight="semibold">
             Automatism
           </Text>
-          <Text style={{ marginTop: '0px' }}>by hurls</Text>
+          <Link
+            style={{ marginTop: '0px' }}
+            target="_blank"
+            href="https://twitter.com/davidhurley87"
+          >
+            <Text display="inline" color="blue.500">
+              by hurls
+            </Text>
+          </Link>
           <Stack gap="12px" fontSize="21px">
             <Text>
               Automatism in art refers to a technique used by artists to access
