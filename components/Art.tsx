@@ -121,7 +121,7 @@ const Art: NextPage = () => {
             </Text>
           </Link>{' '}
           are based on the artists, techniques and movements that helped define
-          automatism in art.
+          automatism.
         </Text>
         <Box>
           <Text>Choose an artist:</Text>
