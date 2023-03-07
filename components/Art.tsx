@@ -62,7 +62,7 @@ const Art: NextPage = () => {
 
     console.log('Calling OpenAI...');
 
-    const prompt = `A ${technique} painting in the style of ${artist} during the ${movement} movement.`;
+    const prompt = `A ${technique.toLocaleLowerCase()} painting in the style of ${artist} during the ${movement} movement.`;
 
     const response = await fetch('/api/generate', {
       method: 'POST',
@@ -83,7 +83,7 @@ const Art: NextPage = () => {
     setIsMinting(true);
     const mintJson = {
       name: 'AI Art',
-      description: `A ${movement}, ${technique} painting in the style of ${artist}`,
+      description: `A ${technique.toLocaleLowerCase()} painting in the style of ${artist} during the ${movement} movement.`,
       image: apiOutput,
       attributes: [
         { trait_type: 'Movement', value: movement },
@@ -97,7 +97,8 @@ const Art: NextPage = () => {
 
     try {
       if (address) {
-        await actionContract.mint(address, path);
+        const transaction = await actionContract.mint(address, path);
+        console.log('Transaction: ', transaction.transactionHash);
         toast.success('NFT minted!');
         setViewOpensea(true);
       }
@@ -225,7 +226,7 @@ const Art: NextPage = () => {
               </Box>
             </Box>
           ) : (
-            <Skeleton zIndex={0} width={500} height={500} />
+            <Box bg="gray.900" zIndex={0} width={500} height={500} />
           )}
         </Stack>
       </Stack>
