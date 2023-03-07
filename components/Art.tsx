@@ -113,8 +113,8 @@ const Art: NextPage = () => {
   };
 
   return (
-    <Flex pt="20px">
-      <Stack w="full" maxW="400px" gap="6">
+    <Flex pt="28px">
+      <Stack w="full" maxW="400px" gap="8">
         <Text>
           <Link href="/traits">
             <Text display="inline" color="blue.500">
