@@ -245,12 +245,7 @@ const Art: NextPage = () => {
                 height={{ base: 300, md: 500 }}
                 position="absolute"
               >
-                <Image
-                  src={apiOutput}
-                  alt="AI"
-                  width={{ base: 300, md: 500 }}
-                  height={{ base: 300, md: 500 }}
-                />
+                <Image src={apiOutput} alt="AI" layout="fill" />
               </Box>
             </Box>
           ) : (
