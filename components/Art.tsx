@@ -112,7 +112,7 @@ const Art: NextPage = () => {
   };
 
   return (
-    <Flex pt="28px" direction={{ base: 'column', md: 'row' }}>
+    <Flex pt="28px" direction={{ base: 'column', xl: 'row' }}>
       <Stack w="full" maxW="400px" gap="8">
         <Text>
           <Link href="/traits">
@@ -226,23 +226,23 @@ const Art: NextPage = () => {
         </Box>
       </Stack>
       <Stack w="full" gap="4">
-        <Stack maxW="500px" mx="auto" py={{ base: '12', md: '0' }}>
+        <Stack maxW="500px" mx="auto" py={{ base: '12', xl: '0' }}>
           {apiOutput ? (
             <Box
-              width={{ base: 300, md: 500 }}
-              height={{ base: 300, md: 500 }}
+              width={{ base: 300, xl: 500 }}
+              height={{ base: 300, xl: 500 }}
               position="relative"
             >
               <Skeleton
                 zIndex={0}
                 position="absolute"
-                width={{ base: 300, md: 500 }}
-                height={{ base: 300, md: 500 }}
+                width={{ base: 300, xl: 500 }}
+                height={{ base: 300, xl: 500 }}
               />
               <Box
                 zIndex={1}
-                width={{ base: 300, md: 500 }}
-                height={{ base: 300, md: 500 }}
+                width={{ base: 300, xl: 500 }}
+                height={{ base: 300, xl: 500 }}
                 position="absolute"
               >
                 <Image src={apiOutput} alt="AI" layout="fill" />
@@ -252,8 +252,8 @@ const Art: NextPage = () => {
             <Box
               bg="gray.900"
               zIndex={0}
-              width={{ base: 300, md: 500 }}
-              height={{ base: 300, md: 500 }}
+              width={{ base: 300, xl: 500 }}
+              height={{ base: 300, xl: 500 }}
             />
           )}
         </Stack>

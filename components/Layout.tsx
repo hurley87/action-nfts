@@ -21,20 +21,20 @@ const Layout = ({ children, title = 'Automatism art' }: Props) => {
       </Head>
       <Flex
         w="full"
-        h={{ base: '100%', md: '100vh' }}
+        h={{ base: '100%', xl: '100vh' }}
         bg="black"
         color="white"
-        direction={{ base: 'column', md: 'row' }}
+        direction={{ base: 'column', xl: 'row' }}
       >
         <Stack
           p="24px"
-          maxW={{ base: '100%', md: '400px' }}
+          maxW={{ base: '100%', xl: '400px' }}
           w="full"
           h="full"
-          borderRight={{ base: 'none', md: '"1px solid #333333"' }}
+          borderRight={{ base: 'none', xl: '1px solid #333333' }}
           gap="18px"
           position="relative"
-          overflowY={{ md: 'scroll' }}
+          overflowY={{ xl: 'scroll' }}
           pb="40px"
         >
           <Text fontSize="5xl" fontWeight="semibold">
@@ -49,7 +49,11 @@ const Layout = ({ children, title = 'Automatism art' }: Props) => {
               by hurls
             </Text>
           </Link>
-          <Stack gap="12px" fontSize={{ base: '18px', md: '21px' }}>
+          <Stack
+            gap="12px"
+            fontSize={{ base: '18px', xl: '21px' }}
+            maxW="700px"
+          >
             <Text>
               Automatism in art refers to a technique used by artists to access
               the subconscious mind in order to produce spontaneous,
@@ -84,7 +88,7 @@ const Layout = ({ children, title = 'Automatism art' }: Props) => {
                 </Text>
               </Link>
             </Flex>
-            <Box display={{ base: 'none', md: 'block' }}>
+            <Box display={{ base: 'none', xl: 'block' }}>
               <Connect />
             </Box>
           </HStack>
