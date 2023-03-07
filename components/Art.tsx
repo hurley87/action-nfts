@@ -54,7 +54,6 @@ const Art: NextPage = () => {
   const [technique, setTechnique] = useState(techniqueOptions[0]);
   const [artist, setArtist] = useState(artistOptions[0]);
   const [isMinting, setIsMinting] = useState(false);
-  const [viewOpensea, setViewOpensea] = useState(false);
   const [transactionHash, setTransactionHash] = useState('');
   const { address } = useAccount();
   const actionContract = useActionContract();
@@ -103,10 +102,10 @@ const Art: NextPage = () => {
         console.log('Transaction: ', transaction.transactionHash);
         setTransactionHash(transaction.transactionHash);
         toast.success('NFT minted!');
-        setViewOpensea(true);
       }
       setIsMinting(false);
-    } catch {
+    } catch (e) {
+      console.log('Error minting NFT: ', e);
       toast.error('Error minting NFT');
       setIsMinting(false);
     }
@@ -204,7 +203,7 @@ const Art: NextPage = () => {
                 <Text
                   onClick={() => {
                     setApiOutput('');
-                    setViewOpensea(false);
+                    setTransactionHash('');
                   }}
                   size="xs"
                   color="blue.500"

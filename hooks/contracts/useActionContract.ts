@@ -6,6 +6,7 @@ import ActionContract from './abis/Action.json';
 const useActionContract = () => {
   const provider = useProvider();
   const { data: signer } = useSigner();
+  console.log(signer);
   const contract = useContract({
     address: '0x7eb20Fe67Fca0cC12736A69d918968b6913617DB', // Add the address that was output from your deploy script, e.g. '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'.
     abi: ActionContract.abi,
