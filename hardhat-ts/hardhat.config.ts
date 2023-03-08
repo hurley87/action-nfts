@@ -9,8 +9,8 @@ const config: HardhatUserConfig = {
   },
   networks: {
     // for testnet
-    goerli: {
-      url: 'https://goerli.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad',
+    'base-goerli': {
+      url: 'https://wiser-blue-aura.base-goerli.quiknode.pro/a7e699d32d5c307d7110798e3957fa5880743d36/',
       accounts: [process.env.WALLET_KEY as string],
     },
     // for local dev environment

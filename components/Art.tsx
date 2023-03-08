@@ -183,7 +183,7 @@ const Art: NextPage = () => {
                     onClick={() =>
                       window
                         ?.open(
-                          `https://goerli.etherscan.io/tx/${transactionHash}`,
+                          `https://base-goerli.blockscout.com/tx/${transactionHash}`,
                           '_blank'
                         )
                         ?.focus()

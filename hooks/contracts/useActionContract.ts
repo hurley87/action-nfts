@@ -8,7 +8,7 @@ const useActionContract = () => {
   const { data: signer } = useSigner();
   console.log(signer);
   const contract = useContract({
-    address: '0x7eb20Fe67Fca0cC12736A69d918968b6913617DB', // Add the address that was output from your deploy script, e.g. '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'.
+    address: '0xD36A2b90Ac460774B96a8cB712CDE6c4aAdcF2b5', // Add the address that was output from your deploy script, e.g. '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512'.
     abi: ActionContract.abi,
     signerOrProvider: signer || provider,
   });

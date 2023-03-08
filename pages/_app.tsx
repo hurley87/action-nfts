@@ -4,25 +4,25 @@ import '@rainbow-me/rainbowkit/styles.css';
 
 import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import { configureChains, createClient, WagmiConfig } from 'wagmi';
-import { goerli } from 'wagmi/chains';
+import { baseGoerli } from 'wagmi/chains';
 import { jsonRpcProvider } from 'wagmi/providers/jsonRpc';
 import { QueryClient, QueryClientProvider, QueryCache } from 'react-query';
 import { Toaster } from 'react-hot-toast';
 
 const { chains, provider } = configureChains(
-  [goerli],
+  [baseGoerli],
   [
     jsonRpcProvider({
       priority: 0,
       rpc: () => ({
-        http: 'https://thrumming-yolo-liquid.ethereum-goerli.quiknode.pro/2914ca7542a25121e666335be39cf66cd5f882e6/',
+        http: 'https://wiser-blue-aura.base-goerli.quiknode.pro/a7e699d32d5c307d7110798e3957fa5880743d36/',
       }),
     }),
   ]
 );
 
 const { connectors } = getDefaultWallets({
-  appName: 'My RainbowKit App',
+  appName: 'Automatism',
   chains,
 });
 

@@ -66,8 +66,8 @@ const Layout = ({ children, title = 'Automatism art' }: Props) => {
               often surprising results.
             </Text>
             <Text>
-              Mint your NFT and join our community using AI to create and sell
-              art.
+              Mint your NFT and join our community of creators exploring
+              AI-generated art.
             </Text>
           </Stack>
         </Stack>

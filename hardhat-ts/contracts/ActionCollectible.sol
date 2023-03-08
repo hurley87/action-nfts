@@ -23,7 +23,7 @@ contract Action is ERC721, ERC721URIStorage {
     }
 
     function tokenURI(uint256 tokenId) public view override(ERC721, ERC721URIStorage) returns (string memory) {
-        return super.tokenURI(tokenId);
+    return super.tokenURI(tokenId);
     }
 
     function mint(address recipient, string memory tokenURI)
